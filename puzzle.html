@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="puzzle.css" rel="stylesheet" type="text/css">
+    <script>
+
+      function puzzle(img){
+          var canvas = document.getElementById("mycanvas");
+          var ctx = canvas.getContext("2d");
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        };
+
+    </script>
+  </head>
+
+  <body>
+
+    <button onclick="puzzle(cutie)">
+      <img id="cutie" src="https://78.media.tumblr.com/5d9e6371d585cb849dae16e6d36c2882/tumblr_ofp3m2tfpj1vwngg2o3_1280.jpg" width="100"/>
+    </button>
+    <div id="menu">
+      <button onclick="puzzle(cool)">
+        <img id="cool" src="https://i.pinimg.com/736x/b0/cc/0f/b0cc0ff690124cbb5bced4fed5aed91f--one-piece-ace-anime-guys.jpg" width="100"/>
+      </button>
+      <button onclick="puzzle(yona)">
+        <img id="yona" src="https://vignette.wikia.nocookie.net/akatsukinoyona/images/7/7c/Yona_Anime.png/revision/latest/scale-to-width-down/250?cb=20150205105525&path-prefix=es" width="100"/>
+      </button>
+    </div>
+    <canvas id="mycanvas" width="600" height="600">
+    Your browser does not support the HTML5 canvas tag.
+    </canvas>
+  </body>
+</html>
