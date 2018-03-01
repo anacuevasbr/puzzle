@@ -5,32 +5,107 @@
     <link href="puzzle.css" rel="stylesheet" type="text/css">
     <script>
 
-      function puzzle(img){
-          var canvas = document.getElementById("mycanvas");
-          var ctx = canvas.getContext("2d");
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      var tiles;
+      var pieceWidth;
+      var pieceHeight;
+      var image;
+      var canvas;
+      var ctx;
 
-        };
+      function puzzle(img){
+
+          document.onmousedown = startpuzzle();
+
+      function startpuzzle(){
+        image = img;
+        tiles = [];
+        canvas = document.getElementById("mycanvas");
+        ctx = canvas.getContext("2d");
+        setvariables();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        buildTiles();
+      }
+
+      function setvariables(){
+        pieceWidth = Math.floor(canvas.width/3);
+        pieceHeight= Math.floor(canvas.height/3);
+        image.naturalHeight = canvas.height;
+        image.naturalWidth = canvas.width;
+      }
+
+      function buildTiles(){
+        var i;
+        var tile;
+        var xpos = 0;
+        var ypos = 0;
+
+        for(i = 0;i<9;i++){
+          tile = {};
+          tile.sx = xpos;
+          tile.sy = ypos;
+          tiles.push(tile);
+          xpos += pieceWidth;
+          if(xpos>=canvas.width){
+            xpos = 0;
+            ypos += pieceHeight;
+          }
+        }
+
+        document.onmousedown = rearrange();
+      }
+
+      function rearrange(){
+
+          tiles = shuffleArray(tiles);
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          var i;
+          var tile;
+          var xpos = 0;
+          var ypos = 0;
+
+
+          for(i = 0;i < 9; i++){
+            tile = tiles[i];
+            tile.xpos = xpos;
+            tile.ypos = ypos;
+            console.log(tile);
+            console.log(i);
+            ctx.drawImage(image, tile.sx, tile.sy, pieceWidth, pieceHeight, xpos, ypos, pieceWidth,pieceHeight);
+            ctx.strokeRect(xpos, ypos, pieceWidth, pieceHeight);
+            xpos += pieceWidth;
+            if(xpos >= canvas.width){
+              xpos = 0;
+              ypos += pieceHeight;
+            }
+          }
+      }
+      function shuffleArray(o){
+          for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+          return o;
+      }
+
+      }
 
     </script>
   </head>
 
   <body>
-
+    <div id="menu">
     <button onclick="puzzle(cutie)">
       <img id="cutie" src="https://78.media.tumblr.com/5d9e6371d585cb849dae16e6d36c2882/tumblr_ofp3m2tfpj1vwngg2o3_1280.jpg" width="100"/>
     </button>
-    <div id="menu">
       <button onclick="puzzle(cool)">
         <img id="cool" src="https://i.pinimg.com/736x/b0/cc/0f/b0cc0ff690124cbb5bced4fed5aed91f--one-piece-ace-anime-guys.jpg" width="100"/>
       </button>
       <button onclick="puzzle(yona)">
-        <img id="yona" src="https://vignette.wikia.nocookie.net/akatsukinoyona/images/7/7c/Yona_Anime.png/revision/latest/scale-to-width-down/250?cb=20150205105525&path-prefix=es" width="100"/>
+        <img id="yona" src="http://4.bp.blogspot.com/-PRTH0Kzx3F4/VrLlHvRSUSI/AAAAAAAALOE/GXq3S7ZycU0/s1600/akatsuki%2Bno%2Byona%2Bwallpaper%2Bhd%2B03.jpg" width="100"/>
       </button>
     </div>
+    <br><br>
     <canvas id="mycanvas" width="600" height="600">
-    Your browser does not support the HTML5 canvas tag.
+      Your browser does not support the HTML5 canvas tag.
     </canvas>
   </body>
 </html>
