@@ -11,6 +11,7 @@
       var image;
       var canvas;
       var ctx;
+      var mouse;
 
       function puzzle(img){
 
@@ -30,8 +31,8 @@
       function setvariables(){
         pieceWidth = Math.floor(canvas.width/3);
         pieceHeight= Math.floor(canvas.height/3);
-        image.naturalHeight = canvas.height;
-        image.naturalWidth = canvas.width;
+
+
       }
 
       function buildTiles(){
@@ -94,13 +95,13 @@
   <body>
     <div id="menu">
     <button onclick="puzzle(cutie)">
-      <img id="cutie" src="https://78.media.tumblr.com/5d9e6371d585cb849dae16e6d36c2882/tumblr_ofp3m2tfpj1vwngg2o3_1280.jpg" width="100"/>
+      <img id="cutie" src="https://data.whicdn.com/images/38111969/original.jpg" width="100"/>
     </button>
       <button onclick="puzzle(cool)">
-        <img id="cool" src="https://i.pinimg.com/736x/b0/cc/0f/b0cc0ff690124cbb5bced4fed5aed91f--one-piece-ace-anime-guys.jpg" width="100"/>
+        <img id="cool" src="https://pm1.narvii.com/6371/d3f41bc0463cff37a40d838d7811fd857a746a04_hq.jpg" width="100"/>
       </button>
       <button onclick="puzzle(yona)">
-        <img id="yona" src="http://4.bp.blogspot.com/-PRTH0Kzx3F4/VrLlHvRSUSI/AAAAAAAALOE/GXq3S7ZycU0/s1600/akatsuki%2Bno%2Byona%2Bwallpaper%2Bhd%2B03.jpg" width="100"/>
+        <img id="yona" src="https://s-media-cache-ak0.pinimg.com/originals/9a/fe/8a/9afe8af3c3cc8e563594d4789fd8459a.jpg" width="100"/>
       </button>
     </div>
     <br><br>
