@@ -45,6 +45,11 @@
           tile = {};
           tile.sx = xpos;
           tile.sy = ypos;
+          if(i != 6){
+            tile.blank = false;
+          } else{
+            tile.blank = true;
+          }
           tiles.push(tile);
           xpos += pieceWidth;
           if(xpos>=canvas.width){
@@ -73,8 +78,13 @@
             tile.ypos = ypos;
             console.log(tile);
             console.log(i);
-            ctx.drawImage(image, tile.sx, tile.sy, pieceWidth, pieceHeight, xpos, ypos, pieceWidth,pieceHeight);
-            ctx.strokeRect(xpos, ypos, pieceWidth, pieceHeight);
+            if (tile.blank == false){
+              ctx.drawImage(image, tile.sx, tile.sy, pieceWidth, pieceHeight, xpos, ypos, pieceWidth,pieceHeight);
+              ctx.strokeRect(xpos, ypos, pieceWidth, pieceHeight);
+          } else{
+              ctx.fillstyle= "Blue";
+              ctx.fillRect(xpos, ypos, pieceWidth, pieceHeight);
+          }
             xpos += pieceWidth;
             if(xpos >= canvas.width){
               xpos = 0;
@@ -82,6 +92,7 @@
             }
           }
       }
+
       function shuffleArray(o){
           for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
           return o;
