@@ -17,6 +17,7 @@
 
           document.onmousedown = startpuzzle();
 
+
       function startpuzzle(){
         image = img;
         tiles = [];
@@ -26,6 +27,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         buildTiles();
+        canvas.onmousedown=function(ev){clickonpiece();};
       }
 
       function setvariables(){
@@ -64,7 +66,9 @@
       function rearrange(){
 
           tiles = shuffleArray(tiles);
-
+          drawpuzzle();
+      }
+      function drawpuzzle(){
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           var i;
           var tile;
@@ -76,8 +80,6 @@
             tile = tiles[i];
             tile.xpos = xpos;
             tile.ypos = ypos;
-            console.log(tile);
-            console.log(i);
             if (tile.blank == false){
               ctx.drawImage(image, tile.sx, tile.sy, pieceWidth, pieceHeight, xpos, ypos, pieceWidth,pieceHeight);
               ctx.strokeRect(xpos, ypos, pieceWidth, pieceHeight);
@@ -97,6 +99,96 @@
           for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
           return o;
       }
+
+      function coordinates(){
+        var x= event.clientX;
+        var y= event.clientY;
+        return [x,y];
+      }
+
+      function movepiece(tiles, a, b){
+
+        var first = tiles[a];
+        var second = tiles[b];
+        tiles[b]=first;
+        tiles[a]=second;
+        return(tiles);
+      }
+
+      function checkforblank(tiles, a){
+
+        var b;
+        var blank=false;
+
+        if (a-1>=0){
+          if(tiles[a-1].blank==true){
+            blank=true;
+            b=a-1;
+          }
+        }
+        if(a+1<9){
+          if(tiles[a+1].blank==true){
+            blank=true;
+            b=a+1;
+          }
+        }
+
+        if(a-3>=0){
+
+          if(tiles[a-3].blank==true){
+            blank=true;
+            b=a-3;
+          }
+        }
+        if(a+3<9){
+          if(tiles[a+3].blank==true){
+            blank=true;
+            b=a+3;
+          }
+        }
+        return [blank, b];
+      }
+
+      function clickonpiece(){
+        var mouse = coordinates();
+        var a;
+        var check;
+        console.log(mouse);
+        if(mouse[0]<208 && mouse[1]<353){
+
+          a=0;
+        } else if(mouse[0]>208 && mouse[0]<408 && mouse[1]<353){
+
+          a=1;
+        } else if(mouse[0]>408 && mouse[1]<353){
+
+          a=2;
+        } else if(mouse[0]<208 && mouse[1]>353 && mouse[1]<553){
+
+          a=3;
+        } else if(mouse[0]>208 && mouse[0]<408 && mouse[1]>353 && mouse[1]<553){
+
+          a=4;
+        } else if(mouse[0]>408 && mouse[1]>353 && mouse[1]<553){
+
+          a=5;
+        } else if(mouse[0]<208 && mouse[1]>553){
+
+          a=6;
+        } else if(mouse[0]>208 && mouse[0]<408 && mouse[1]>553){
+
+          a=7;
+        } else{
+
+          a=8;
+        }
+        check = checkforblank(tiles, a);
+        if(check[0]==true){
+          tiles =movepiece(tiles, a, check[1]);
+          drawpuzzle();
+        }
+      }
+
 
       }
 
