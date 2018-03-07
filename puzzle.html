@@ -119,22 +119,28 @@
 
         var b;
         var blank=false;
-
-        if (a-1>=0){
-          if(tiles[a-1].blank==true){
-            blank=true;
-            b=a-1;
+        console.log(a);
+        if(a!=3 && a!=6){
+          console.log('entra en el or');
+          if (a-1>=0){
+            if(tiles[a-1].blank==true){
+              blank=true;
+              b=a-1;
+            }
           }
         }
-        if(a+1<9){
-          if(tiles[a+1].blank==true){
-            blank=true;
-            b=a+1;
+
+        if(a!=2 && a!=5){
+          console.log('entra en el or');
+          if(a+1<9){
+            if(tiles[a+1].blank==true){
+              blank=true;
+              b=a+1;
+            }
           }
         }
 
         if(a-3>=0){
-
           if(tiles[a-3].blank==true){
             blank=true;
             b=a-3;
@@ -146,6 +152,32 @@
             b=a+3;
           }
         }
+        //En diagonaal por que no me sale
+        if(a-4>=0){
+          if(tiles[a-4].blank==true){
+            blank=true;
+            b=a-4;
+          }
+        }
+        if(a+4<9){
+          if(tiles[a+4].blank==true){
+            blank=true;
+            b=a+4;
+          }
+        }
+        if(a-2>=0){
+          if(tiles[a-2].blank==true){
+            blank=true;
+            b=a-2;
+          }
+        }
+        if(a+2<9){
+          if(tiles[a+2].blank==true){
+            blank=true;
+            b=a+2;
+          }
+        }
+
         return [blank, b];
       }
 
