@@ -12,10 +12,14 @@
       var canvas;
       var ctx;
       var mouse;
+      var won=false;
+      var t=0;
+      var c=0;
 
       function puzzle(img){
 
           startpuzzle();
+          timer();
           buildTiles();
           rearrange();
           canvas.onmousedown=function(ev){clickonpiece();};
@@ -60,7 +64,7 @@
             xpos = 0;
             ypos += pieceHeight;
           }
-          
+
         }
 
       }
@@ -230,7 +234,7 @@
         var i;
         var sum = 0;
         var tile;
-        var won = false;
+
 
         for(i = 0;i<9;i++){
           tile = tiles[i];
@@ -240,10 +244,32 @@
         }
         if (sum ==9){
           won = true;
+          canvas.onmousedown=function(ev){nullfunction();};
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          var record = localStorage.record;
+          if (record>t){
+            localStorage['record'] = t;
+            setTimeout("alert(t);", 500);
+          }
+          console.log(t);
+          console.log(record);
+
+
         }
-        console.log(won);
+
+      }
+      function nullfunction(){
+
       }
 
+      function timer(){
+
+
+        document.getElementById("time").value =c;
+        c=c+1;
+        t=setTimeout(function(){timer() }, 1000);
+      }
       }
 
     </script>
@@ -265,5 +291,7 @@
     <canvas id="mycanvas" width="600" height="600">
       Your browser does not support the HTML5 canvas tag.
     </canvas>
+
+    <input type="text" id="time">
   </body>
 </html>
