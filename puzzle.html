@@ -21,7 +21,7 @@
           t=0;
 
           startpuzzle();
-          timer();
+          starttimer();
           buildTiles();
           rearrange();
           canvas.onmousedown=function(ev){clickonpiece();};
@@ -250,11 +250,15 @@
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           var record = localStorage.record;
-          if (record>t ? true : false){
-            localStorage['record'] = t;
-            setTimeout("alert(t);", 500);
+          if (record == undefined) {
+            record = 10000000;
           }
-          console.log(t);
+          if (record>c){
+            localStorage['record'] = c;
+            setTimeout("alert(c);", 500);
+          }
+          console.log('c='+c);
+          console.log('t='+t);
           console.log(record);
 
 
@@ -264,7 +268,13 @@
       function nullfunction(){
 
       }
+      function starttimer(){
+        c=0;
+        t=0;
+        clearTimeout(t);
+        timer();
 
+      }
       function timer(){
 
         clearTimeout(t);
