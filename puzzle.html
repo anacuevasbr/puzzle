@@ -17,6 +17,8 @@
       var c=0;
 
       function puzzle(img){
+          c=0;
+          t=0;
 
           startpuzzle();
           timer();
@@ -215,7 +217,7 @@
         } else if(mouse[0]<vertone && mouse[1]>hortwo){
 
           a=6;
-        } else if(mouse[0]>vertone && mouse[0]<verttwo && mouse[1]>hortwo){
+        clearTimeout(t);} else if(mouse[0]>vertone && mouse[0]<verttwo && mouse[1]>hortwo){
 
           a=7;
         } else{
@@ -248,7 +250,7 @@
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           var record = localStorage.record;
-          if (record>t){
+          if (record>t ? true : false){
             localStorage['record'] = t;
             setTimeout("alert(t);", 500);
           }
@@ -265,7 +267,7 @@
 
       function timer(){
 
-
+        clearTimeout(t);
         document.getElementById("time").value =c;
         c=c+1;
         t=setTimeout(function(){timer() }, 1000);
