@@ -92,7 +92,7 @@
               ctx.drawImage(image, tile.sx, tile.sy, pieceWidth, pieceHeight, xpos, ypos, pieceWidth,pieceHeight);
               ctx.strokeRect(xpos, ypos, pieceWidth, pieceHeight);
           } else{
-              ctx.fillstyle= "Blue";
+              ctx.fillStyle= "Black";
               ctx.fillRect(xpos, ypos, pieceWidth, pieceHeight);
           }
             xpos += pieceWidth;
@@ -256,6 +256,7 @@
           if (record>c){
             localStorage['record'] = c;
             setTimeout("alert(c);", 500);
+            clearInterval(t);
           }
           console.log('c='+c);
           console.log('t='+t);
@@ -277,7 +278,7 @@
       }
       function timer(){
 
-        //clearTimeout(t);
+        clearTimeout(t);
         document.getElementById("time").value =c;
         c=c+1;
         t=setTimeout(function(){timer() }, 1000);
