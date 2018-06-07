@@ -16,6 +16,7 @@
       var t=0;
       var id;
 
+
       function puzzle(img){
 
 
@@ -23,8 +24,7 @@
           starttimer();
           buildTiles();
           rearrange();
-          canvas.onmousedown=function(ev){clickonpiece();};
-
+          canvas.onmousedown=function(ev){clickonpiece(ev);};
 
       function startpuzzle(){
         image = img;
@@ -107,7 +107,7 @@
           return o;
       }
 
-      function coordinates(){
+      function coordinates(event){
         var x= event.clientX;
         var y= event.clientY;
         return [x,y];
@@ -185,8 +185,11 @@
         return [blank, b];
       }
 
-      function clickonpiece(){
-        var mouse = coordinates();
+
+      function clickonpiece(event){
+
+        var mouse = coordinates(event);
+        console.log(mouse);
         var a;
         var check;
         var canvpos = [canvas.offsetTop, canvas.offsetLeft];
@@ -275,9 +278,7 @@
 
       }
       function timer(n){
-        console.log(t);
-        console.log(n);
-        console.log(id);
+
         document.getElementById("time").value =t;
         t=t+1;
         if (n == id) {
