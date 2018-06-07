@@ -14,11 +14,10 @@
       var mouse;
       var won=false;
       var t=0;
-      var c=0;
+      var id;
 
       function puzzle(img){
-          c=0;
-          t=0;
+
 
           startpuzzle();
           starttimer();
@@ -217,7 +216,7 @@
         } else if(mouse[0]<vertone && mouse[1]>hortwo){
 
           a=6;
-        clearTimeout(t);} else if(mouse[0]>vertone && mouse[0]<verttwo && mouse[1]>hortwo){
+        } else if(mouse[0]>vertone && mouse[0]<verttwo && mouse[1]>hortwo){
 
           a=7;
         } else{
@@ -253,13 +252,12 @@
           if (record == undefined) {
             record = 10000000;
           }
-          if (record>c){
-            localStorage['record'] = c;
-            setTimeout("alert(c);", 500);
+          if (record>t){
+            localStorage['record'] = t;
+            setTimeout("alert(t);", 500);
             clearInterval(t);
           }
-          console.log('c='+c);
-          console.log('t='+t);
+
           console.log(record);
 
 
@@ -270,18 +268,21 @@
 
       }
       function starttimer(){
-        c=0;
         t=0;
+        id = Math.random();
         clearTimeout(t);
-        timer();
+        timer(id);
 
       }
-      function timer(){
-
-        clearTimeout(t);
-        document.getElementById("time").value =c;
-        c=c+1;
-        t=setTimeout(function(){timer() }, 1000);
+      function timer(n){
+        console.log(t);
+        console.log(n);
+        console.log(id);
+        document.getElementById("time").value =t;
+        t=t+1;
+        if (n == id) {
+          setTimeout(function(){timer(n) }, 1000);
+        }
       }
       }
 
@@ -301,10 +302,11 @@
       </button>
     </div>
     <br><br>
+    <input type="text" id="time">
+    <br>
     <canvas id="mycanvas" width="600" height="600">
       Your browser does not support the HTML5 canvas tag.
     </canvas>
 
-    <input type="text" id="time">
   </body>
 </html>
